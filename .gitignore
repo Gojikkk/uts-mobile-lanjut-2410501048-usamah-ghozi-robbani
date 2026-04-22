@@ -3,6 +3,9 @@
 # dependencies
 node_modules/
 
+# dotenv environment variables file
+.env
+
 # Expo
 .expo/
 dist/
