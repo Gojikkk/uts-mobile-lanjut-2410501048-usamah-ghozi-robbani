@@ -5,11 +5,11 @@
 
     const Stack = createNativeStackNavigator();
 
-    export default function AuthNavigator({onLoginSucces}) {
+    export default function AuthNavigator({onLoginSuccess}) {
         return (
             <Stack.Navigator 
             screenOptions={{
-                headerStyle: { backgoroundColor: '#ffff'},
+                headerStyle: { backgroundColor: '#ffff'},
                 headerTintColor: 'black',
                 headerTitleAlign: 'center',
                 headerShadowVisible: false,

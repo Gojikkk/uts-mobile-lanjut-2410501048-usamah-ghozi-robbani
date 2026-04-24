@@ -1,5 +1,6 @@
 import { createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Ionicons from 'expo/vector-icons/Ionicons';
+import {Ionicons} from '@expo/vector-icons';
+import React from 'react';
 import HomeScreen from '../screen/HomeScreen';
 import AboutScreen from '../screen/AboutScreen';
 import SearchScreen from '../screen/SearchScreen';
@@ -10,6 +11,7 @@ function HomeTabs() {
 return (
     <Tab.Navigator
     screenOptions={({ route }) => ({
+
     tabBarIcon: ({ focused, color, size }) => {
         const icons = {
             Home: focused ? 'home' : 'home-outline',
