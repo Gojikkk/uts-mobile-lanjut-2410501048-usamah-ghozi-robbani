@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import Loading from '../components/Loading';
 import ErrorState from '../components/ErrorState';
 import { useBookDetails } from '../hooks/useApiState';
-
+import { useFavorite } from '../context/FavoriteContext';
 
 export default function DetailScreen({ route }) {
     const [refreshing, setRefreshing] = useState(false);
@@ -24,6 +24,8 @@ export default function DetailScreen({ route }) {
     bookDetails?.description?.value ||
     bookDetails?.description ||
     'No description available';
+    const { addFavorite, removeFavorite, isFavorite } = useFavorite();
+    const favorite = isFavorite(bookDetails?.key);
 
 
     useEffect(() => {
@@ -39,7 +41,9 @@ export default function DetailScreen({ route }) {
     }
 
     return (
-        <View style={styles.container}>
+        <ScrollView style={styles.container}
+            contentContainerStyle={{ paddingBottom: 30 }}>
+            
             <View style={styles.coverContainer}>
                 <Image source={{ uri: coverImageUrl }} style={styles.coverImage} />
             </View>
@@ -47,9 +51,30 @@ export default function DetailScreen({ route }) {
                 <Text style={styles.title}>{bookDetails?.title || 'No Title'}</Text>
                 <Text style={styles.author}>{authorName || 'Unknown Author'}</Text>
                 <Text style={styles.publishYear}>First Published: {publishYear}</Text>
+                <Text style={styles.descriptionTitle}>Description:</Text>
                 <Text style={styles.description}>{description}</Text>
             </View>
-        </View>
+            <TouchableOpacity
+    style={styles.favoriteButton}
+    onPress={() => {
+        if (favorite) {
+            removeFavorite(bookDetails.key);
+        } else {
+            addFavorite({
+    key: bookDetails?.key,
+    title: bookDetails?.title,
+    author_name: [authorName],
+    first_publish_year: publishYear,
+    cover_i: coverId,
+});
+        }
+    }}
+>
+    <Text style={styles.favoriteButtonText}>
+        {favorite ? 'Remove Favorite' : 'Add to Favorite'}
+    </Text>
+</TouchableOpacity>
+        </ScrollView>
     );
 }
 
@@ -108,5 +133,35 @@ const styles = StyleSheet.create({
         padding: 15,
         borderRadius: 12,
         elevation: 2,
-    }
+    },
+    descriptionTitle: {
+        fontSize: 18,
+        fontWeight: '600',
+        color: '#333',
+        marginBottom: 8,
+    },
+    favoriteButton: {
+    marginTop: 25,
+    marginHorizontal: 20,
+    backgroundColor: '#4A90E2',
+    paddingVertical: 15,
+    borderRadius: 14,
+    alignItems: 'center',
+    justifyContent: 'center',
+    elevation: 3,
+    shadowColor: '#000',
+    shadowOffset: {
+        width: 0,
+        height: 2,
+    },
+    shadowOpacity: 0.15,
+    shadowRadius: 4,
+},
+
+favoriteButtonText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '700',
+    letterSpacing: 0.5,
+},
 });

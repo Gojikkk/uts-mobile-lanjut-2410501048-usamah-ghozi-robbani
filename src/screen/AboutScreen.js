@@ -86,11 +86,26 @@ export default function AboutScreen(onLogout) {
                 : <View style={styles.placeholder}><Text>Pilih Foto</Text></View>
             }
         </TouchableOpacity>
+
+        <View style={styles.infoContainer}>
+            
+            <Text style={styles.title}>Profile</Text>
+            <Text style={styles.keterangan}>Nama</Text>
             <Text style={styles.name}>{user.name}</Text>
-            <Text style={styles.nim}>{user.nim}</Text>
+
+            <Text style={styles.keterangan}>NIM</Text>
+            <Text style={styles.nim}>2410501048</Text>
+
+            <Text style={styles.keterangan}>Kelas</Text>
             <Text style={styles.kelas}>B</Text>
+
+            <Text style={styles.keterangan}>Tema</Text>
             <Text style={styles.tema}>BookShelf</Text>
+
+            <Text style={styles.keterangan}>Email</Text>
             <Text style={styles.email}>{user.email}</Text>
+        </View>
+
             <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
             <Text style={styles.logoutButtonText}>Logout</Text>
         
@@ -102,64 +117,104 @@ export default function AboutScreen(onLogout) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        backgroundColor: '#f2f4f7',
         alignItems: 'center',
+        paddingTop: 40,
     },
+
     title: {
-        fontSize: 24,
-        fontWeight: 'bold',
+        fontSize: 26,
+        fontWeight: '800',
         marginBottom: 20,
+        color: '#1c1c1e',
     },
+
     avatar: {
-        width: 100,
-        height: 100,
-        borderRadius: 50,
-        marginBottom: 20,
+        width: 120,
+        height: 120,
+        borderRadius: 60,
+        marginBottom: 15,
+        backgroundColor: '#ddd',
     },
+
     placeholder: {
-        width: 100,
-        height: 100,
-        borderRadius: 50,
+        width: 120,
+        height: 120,
+        borderRadius: 60,
         backgroundColor: '#ccc',
         justifyContent: 'center',
         alignItems: 'center',
-        marginBottom: 20,
+        marginBottom: 15,
     },
+
+    infoContainer: {
+        width: '90%',
+        backgroundColor: '#fff',
+        borderRadius: 16,
+        padding: 20,
+        marginBottom: 25,
+
+        shadowColor: '#000',
+        shadowOpacity: 0.08,
+        shadowRadius: 10,
+        elevation: 3,
+    },
+
+    keterangan: {
+        fontSize: 12,
+        color: '#888',
+        marginTop: 12,
+    },
+
     name: {
-        fontSize: 22,    
-        fontWeight: 'bold',
-        marginBottom: 10,
+        fontSize: 18,
+        fontWeight: '700',
+        color: '#222',
+        marginBottom: 5,
     },
+
     nim: {
-        fontSize: 18,
-        color: '#666',
-        marginBottom: 5,
-    },
-    kelas: {
-        fontSize: 18,
-        color: '#666',
-        marginBottom: 5,
-    },
-    tema: {
-        fontSize: 18, 
-    },
-    email: {
         fontSize: 16,
-        color: '#999',
-        marginBottom: 20,
+        color: '#444',
+        marginBottom: 5,
     },
+
+    kelas: {
+        fontSize: 16,
+        color: '#444',
+        marginBottom: 5,
+    },
+
+    tema: {
+        fontSize: 16,
+        color: '#444',
+        marginBottom: 5,
+    },
+
+    email: {
+        fontSize: 15,
+        color: '#666',
+        marginBottom: 5,
+    },
+
     logoutButton: {
         backgroundColor: '#ff4d4d',
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        borderRadius: 5,
+        paddingVertical: 12,
+        paddingHorizontal: 30,
+        borderRadius: 12,
+        marginTop: 10,
+        width: '60%',
+        alignItems: 'center',
+
+        shadowColor: '#000',
+        shadowOpacity: 0.1,
+        shadowRadius: 6,
+        elevation: 2,
     },
+
     logoutButtonText: {
         color: '#fff',
         fontSize: 16,
-        fontWeight: '600', 
+        fontWeight: '700',
     },
 });
-
-
-

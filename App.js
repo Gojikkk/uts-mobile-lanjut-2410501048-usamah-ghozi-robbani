@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import AppNavigator from './src/navigation/AppNavigator';
 import { FavoriteContext } from './src/context/FavoriteContext';
 import { FavoriteReducer, initialState } from './src/context/FavoriteReducers';
+import FavoriteProvider from './src/provider/FavoriteProvider';
 
 export default function App() {
     const [favorites, dispatch] = React.useReducer(FavoriteReducer, initialState);
@@ -20,10 +21,10 @@ export default function App() {
         };
 
     return (
-        <FavoriteContext.Provider value={{ favorites, addFavorite, removeFavorite, isFavorite }}>
+        <FavoriteProvider>
             <NavigationContainer>
                 <AppNavigator />
             </NavigationContainer>
-        </FavoriteContext.Provider>
+        </FavoriteProvider>
     );
 }
