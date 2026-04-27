@@ -8,11 +8,11 @@ import {
     StyleSheet,
     SafeAreaView,
 } from 'react-native';
-import { FavoriteContext } from '../context/FavoriteContext'; 
+import { useFavorite } from '../context/FavoriteContext'; 
 import BookCard from '../components/BookCard';
 
 export default function FavoriteScreen({ navigation }) {
-    const { favorites, removeFavorite } = FavoriteContext();
+    const { favorites, removeFavorite } = useFavorite();
 
     if (favorites.length === 0) {
         return (
@@ -31,7 +31,7 @@ export default function FavoriteScreen({ navigation }) {
                 renderItem={({ item }) => (
                     <BookCard
                         item={item}
-                        onPress={() => navigation.navigate('BookDetails', { bookKey: item.key })}
+                        onPress={() => navigation.navigate('Detail', { book: item })}
                         onRemoveFavorite={() => removeFavorite(item.key)}
                     />
                 )}

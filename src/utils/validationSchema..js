@@ -34,3 +34,9 @@ export const registerSchema = Yup.object().shape({
  .oneOf([Yup.ref('password'), null], 'Password tidak cocok')
  .required('Konfirmasi password wajib diisi'),
 })
+
+export const searchSchema = Yup.object().shape({
+    query: Yup.string()
+    .min(3, 'Kata kunci minimal 3 karakter')
+    .required('Kata kunci wajib diisi'),
+})

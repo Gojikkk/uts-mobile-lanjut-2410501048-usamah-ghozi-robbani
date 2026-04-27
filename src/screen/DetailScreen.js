@@ -8,10 +8,23 @@ import { useBookDetails } from '../hooks/useApiState';
 export default function DetailScreen({ route }) {
     const [refreshing, setRefreshing] = useState(false);
     const { bookKey } = route.params;
-    const { bookDetails, loading, error, fetchBookDetails } = useBookDetails(bookKey);
-        const coverImageUrl = bookDetails?.cover_i
-        ? `https://covers.openlibrary.org/b/id/${bookDetails.cover_i}-L.jpg`
-        : 'https://via.placeholder.com/150x200?text=No+Cover';
+    const { bookDetails, authorName, loading, error, fetchBookDetails } = useBookDetails(bookKey);
+    const coverId =
+    bookDetails?.cover_i ||
+    bookDetails?.covers?.[0];
+    const coverImageUrl = coverId
+    ? `https://covers.openlibrary.org/b/id/${coverId}-L.jpg`
+    : 'https://via.placeholder.com/150x200?text=No+Cover';
+    const publishYear =
+    bookDetails?.first_publish_year ||
+    bookDetails?.first_publish_date ||
+    bookDetails?.created?.value ||
+    'N/A';
+    const description =
+    bookDetails?.description?.value ||
+    bookDetails?.description ||
+    'No description available';
+
 
     useEffect(() => {
         fetchBookDetails(bookKey);
@@ -22,7 +35,7 @@ export default function DetailScreen({ route }) {
     }
 
     if (error && !refreshing) {
-        return <ErrorState message={error} onRetry={fetchTrendingBooks} />;
+        return <ErrorState message={error} onRetry={() => fetchBookDetails(bookKey)} />;
     }
 
     return (
@@ -32,8 +45,9 @@ export default function DetailScreen({ route }) {
             </View>
             <View style={styles.infoContainer}>
                 <Text style={styles.title}>{bookDetails?.title || 'No Title'}</Text>
-                <Text style={styles.author}>{bookDetails?.author_name?.join(', ') || 'Unknown Author'}</Text>
-                <Text style={styles.publishYear}>First Published: {bookDetails?.first_publish_year || 'N/A'}</Text>
+                <Text style={styles.author}>{authorName || 'Unknown Author'}</Text>
+                <Text style={styles.publishYear}>First Published: {publishYear}</Text>
+                <Text style={styles.description}>{description}</Text>
             </View>
         </View>
     );
@@ -42,39 +56,57 @@ export default function DetailScreen({ route }) {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 20,
-        backgroundColor: '#fff',
-    }, 
+        backgroundColor: '#f2f4f7',
+    },
+
     coverContainer: {
         alignItems: 'center',
-        marginBottom: 20,
+        marginTop: 30,
+        marginBottom: 15,
     },
+
     coverImage: {
-        width: 150,
-        height: 200,
-        borderRadius: 10,
-        backgroundColor: '#eee',
+        width: 180,
+        height: 260,
+        borderRadius: 16,
+        backgroundColor: '#e0e0e0',
     },
+
     infoContainer: {
-        alignItems: 'center',
+        paddingHorizontal: 20,
+        paddingTop: 10,
     },
-    title: {    
-        fontSize: 24,
-        fontWeight: 'bold',
-        color: '#333',  
-        marginBottom: 10,
+
+    title: {
+        fontSize: 26,
+        fontWeight: '800',
+        color: '#1c1c1e',
         textAlign: 'center',
+        marginBottom: 10,
     },
+
     author: {
-        fontSize: 18,
-        color: '#666',
-        marginBottom: 5,
-    },
-    publishYear: {
         fontSize: 16,
-        color: '#999',
+        color: '#555',
+        textAlign: 'center',
+        marginBottom: 8,
+    },
+
+    publishYear: {
+        fontSize: 13,
+        color: '#777',
+        textAlign: 'center',
+        marginBottom: 15,
+    },
+
+    description: {
+        fontSize: 15,
+        color: '#333',
+        lineHeight: 22,
+        textAlign: 'justify',
+        backgroundColor: '#fff',
+        padding: 15,
+        borderRadius: 12,
+        elevation: 2,
     }
 });
-
-
-

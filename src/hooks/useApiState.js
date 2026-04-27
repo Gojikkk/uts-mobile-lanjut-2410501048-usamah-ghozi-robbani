@@ -45,6 +45,7 @@ export const useSearchResults = () => {
 
 export const useBookDetails = () => {
     const [bookDetails, setBookDetails] = useState(null);
+    const [authorName, setAuthorName] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);    
 
@@ -54,6 +55,14 @@ export const useBookDetails = () => {
         try {
             const data = await getBookDetails(key);
             setBookDetails(data);
+            
+            const authorKey = data?.authors?.[0]?.author?.key;
+
+            if (authorKey) {
+                const res = await fetch(`https://openlibrary.org${authorKey}.json`);
+                const authorData = await res.json();
+                setAuthorName(authorData.name || 'Unknown Author');
+            }
         } catch (err) {
             setError(err.message || 'Failed to fetch book details');
         } finally {
@@ -61,11 +70,13 @@ export const useBookDetails = () => {
         }
     }, []);    
 
-    return ({
+    
+
+return ({
         bookDetails,
+        authorName,
         loading,
         error,
         fetchBookDetails
-    })
-    }
-
+    });
+};

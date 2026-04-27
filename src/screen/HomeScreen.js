@@ -11,6 +11,7 @@ import Loading from '../components/Loading';
 import ErrorState from '../components/ErrorState';
 import { useTrendingBooks } from '../hooks/useApiState';
 
+
 export default function HomeScreen({ navigation }) {
     const [refreshing, setRefreshing] = useState(false);
     const { trendingBooks, loading, error, fetchTrendingBooks } = useTrendingBooks();
@@ -47,7 +48,7 @@ export default function HomeScreen({ navigation }) {
                 <BookCard
                     item={item}
                     onPress={() =>
-                        navigation.navigate('BookDetails', { bookKey: item.key })
+                        navigation.navigate('Detail', { bookKey: item.key })
                     }
                 />
             )}
