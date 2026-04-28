@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Alert, Image } from 'react-na
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ImagePicker from 'expo-image-picker';
 
-export default function AboutScreen(onLogout) {
+export default function AboutScreen({onLogout}) {
     const [user, setUser] = useState(null);
     const [profileImage, setProfileImage] = useState(null);
 
@@ -15,7 +15,7 @@ export default function AboutScreen(onLogout) {
         }
 
         const result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ['Images'],
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
             allowsEditing: true,
             aspect: [1, 1],
             quality: 0.7,
