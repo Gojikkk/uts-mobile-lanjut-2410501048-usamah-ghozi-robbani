@@ -58,7 +58,7 @@ export default function SearchScreen({ navigation, route }) {
         <SearchInput
         label="Search Books"
         placeholder="Enter book title, author, or keyword"
-        value={query}
+        value={formik.values.query}
         onChangeText={(text) => formik.setFieldValue('query', text)}
         onSubmit={formik.handleSubmit}
         error={formik.errors.query}
@@ -78,7 +78,7 @@ export default function SearchScreen({ navigation, route }) {
                 <BookCard
                     item={item}
                     onPress={() =>
-                        navigation.navigate('Detail', { book: item })
+                        navigation.navigate('Detail', { bookKey: item.key })
                     }
                 />
             )}
@@ -93,7 +93,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-    },
+        paddingTop: -30,
+        paddingHorizontal: 5,
+    },  
     row: {
         justifyContent: 'space-between',
         marginBottom: 16,
