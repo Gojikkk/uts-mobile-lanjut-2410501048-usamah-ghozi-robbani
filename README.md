@@ -34,7 +34,7 @@ b. agar bisa diakse secara global, sehingga bisa diakses oleh semua komponen
 c. semua yg berhubungan dengan favorite jadi terpusat di satu tempat yaitu provider
 
 LINK VIDEO DEMO: 
-- LINK DRIVE: [VIDEO DRIVE]([url](https://drive.google.com/drive/folders/1Ck8ZRXSP---Cnv7-khgjEXsRrjE2akvc?usp=drive_link))
+- LINK DRIVE: [VIDEO DRIVE](https://drive.google.com/drive/folders/1Ck8ZRXSP---Cnv7-khgjEXsRrjE2akvc?usp=drive_link) 
 - LINK YOUTUBE: [VIDEO YOUTUBE](https://youtu.be/KTISGfgtRSQ?si=xM2Ux5U7yfXzLsrp)
 
 DAFTAR RENFRENSI: 
